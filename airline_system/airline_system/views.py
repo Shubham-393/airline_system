@@ -12,12 +12,14 @@ from django.conf import settings
 # from utils.mongo_connection import db
 
 
-
-# Use the connection string from MongoDB Atlas
-client = MongoClient("mongodb+srv://youtubepy:youtubepy@cluster0.hlekbr4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-
-# Choose the database to use
-db = client['airline_reservation_system']
+try:
+    # Use the connection string from MongoDB Atlas
+    client = MongoClient("mongodb+srv://youtubepy:youtubepy@cluster0.hlekbr4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    db = client['airline_reservation_system']
+except (ConnectionError, ConfigurationError) as e:
+    # Log the error and provide a response
+    print("MongoDB Connection Error:", e)
+    db = None  # Set db to None if there's a connection issue
 
 # try:
 #     db.command('ping')
