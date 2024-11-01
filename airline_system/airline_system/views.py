@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, redirect, HttpResponse
 from functools import wraps
+from pymongo.errors import ConnectionError, ConfigurationError
 
 import razorpay
 from django.conf import settings
